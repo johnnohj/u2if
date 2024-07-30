@@ -83,7 +83,7 @@
   #define USB_MFG "Waveshare"
   #define USB_PRD "RP2040 One U2IF"
   #define USB_VID 0x2E8A
-  #define USB_PID 0x000C
+  #define USB_PID 0x111F
 #elif BOARD == PICO
   #define USB_MFG "Pico"
   #define USB_PRD "U2IF"
