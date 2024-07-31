@@ -17,7 +17,7 @@
 #define FEATHER_RFM     7
 #define FEATHER_CAN     8
 #define KB2040          9
-#define RP2040_ONE      10
+#define WAVESHARE_RP2040_ONE      10
 
 
 #define BOARD ${BOARD}
@@ -229,7 +229,7 @@
 //---------------------------------------------------------
 // RP2040 One (Waveshare)
 //---------------------------------------------------------
-#elif BOARD == RP2040_ONE
+#elif BOARD == WAVESHARE_RP2040_ONE
   // I2C0
   #define I2C0_ENABLED 1
   #define U2IF_I2C0_SDA 4
