@@ -2,7 +2,7 @@
 
 
 
-StreamBuffer::StreamBuffer(int streamBufferSize)
+StreamBuffer::StreamBuffer(uint streamBufferSize)
     : _buffer(streamBufferSize/4 + 2, 0), _bufSize(0) {
 
 }
