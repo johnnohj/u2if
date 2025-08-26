@@ -18,6 +18,9 @@ jobs:
 # https://github.com/raspberrypi/pico-sdk/pull/457
       - name: Patch pico-sdk for crystal startup
         run: sed -i 's/xosc_hw->startup = startup_delay;/xosc_hw->startup = startup_delay * 64;/' firmware/pico-sdk/src/rp2_common/hardware_xosc/xosc.c
+# also need this include
+      - name: Patch pico-sdk for cstdint include
+        run: sed -i '13i \#include <cstdint>' firmware/pico-sdk/tools/pioasm/pio_disassembler.h
 #-- HACK-----------------------------------------------------------
       - name: Build firmwares
         run: |
@@ -27,12 +30,16 @@ jobs:
           cd build
           cmake -DBOARD=PICO .. ; make ; mv u2if.uf2 u2if_pico.uf2
           cmake -DBOARD=FEATHER .. ; make ; mv u2if.uf2 u2if_feather.uf2
+          cmake -DBOARD=FEATHER_CAN .. ; make ; mv u2if.uf2 u2if_feather_can.uf2
+          cmake -DBOARD=FEATHER_EPD .. ; make ; mv u2if.uf2 u2if_feather_epd.uf2
+          cmake -DBOARD=FEATHER_RFM .. ; make ; mv u2if.uf2 u2if_feather_rfm.uf2
           cmake -DBOARD=QTPY .. ; make ; mv u2if.uf2 u2if_qtpy.uf2
           cmake -DBOARD=ITSYBITSY .. ; make ; mv u2if.uf2 u2if_itsybitsy.uf2
           cmake -DBOARD=QT2040_TRINKEY .. ; make ; mv u2if.uf2 u2if_trinkey.uf2
+          cmake -DBOARD=KB2040 .. ; make ; mv u2if.uf2 u2if_kb2040.uf2
           ls -l u2if_*.uf2
       - name: Add Build Artifacts to CI Run
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: firmware_uf2s
           path: firmware/source/build/u2if_*.uf2
